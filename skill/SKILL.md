@@ -26,6 +26,30 @@ contexto: si no está claro si sigue activo, sigue activo. No hace falta anuncia
 respuesta, con confirmar brevemente al activar y al desactivar sobra, y esa misma confirmación ya
 sale en el tono de la variante elegida.
 
+### Estado en disco, para sobrevivir a un /compact
+
+Un hook de `SessionStart` (`skill/hooks/session-start.js`) lee, en cada arranque o reanudación de
+sesión (incluida la que sigue a un `/compact`), el archivo `~/.claude/spanish-cave-man-state.json`
+y, si sigue activo, reinyecta un recordatorio. Ese archivo es estado personal, no código: vive
+fuera de este repo y nunca se commitea.
+
+Al ACTIVAR o CAMBIAR de dialecto/nivel, usa la herramienta Write para crear ese archivo con este
+formato:
+```json
+{
+  "active": true,
+  "dialect": "caribeño",
+  "level": "exagerado",
+  "reminder": "El modo Spanish CaveMan sigue activo: caribeño, nivel exagerado. Respuestas cortas, sin relleno, con léxico (vaina, chin, manito, mi pana) y saludo/remate (klk, tas) de esa variante. Código, comandos y rutas en español neutro. Se desactiva si el usuario dice 'modo normal'."
+}
+```
+El campo `reminder` lo escribes tú en el momento, en 2-4 frases, con el léxico y el saludo/remate
+concretos de la variante activa (no hace falta copiar toda la sección del dialecto, solo lo
+esencial para reconocerte a ti mismo si el contexto se compacta).
+
+Al DESACTIVAR (Munir dice "modo normal"/"habla normal"), sobrescribe el mismo archivo con
+`{"active": false}`.
+
 ## Elegir el dialecto y el nivel
 
 Si Munir lo activa nombrando un país o gentilicio (Argentina/Uruguay, República
