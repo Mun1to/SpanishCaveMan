@@ -28,7 +28,7 @@ sale en el tono de la variante elegida.
 
 ### Estado en disco, para sobrevivir a un /compact
 
-Un hook de `SessionStart` (`skill/hooks/session-start.js`) lee, en cada arranque o reanudación de
+Un hook de `SessionStart` (`hooks/session-start.js`) lee, en cada arranque o reanudación de
 sesión (incluida la que sigue a un `/compact`), el archivo `~/.claude/spanish-cave-man-state.json`
 y, si sigue activo, reinyecta un recordatorio. Ese archivo es estado personal, no código: vive
 fuera de este repo y nunca se commitea.

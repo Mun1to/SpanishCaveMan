@@ -38,22 +38,48 @@ until you say "modo normal". Code blocks, terminal commands, file paths, exact t
 and anything meant for a third party (commit messages, docs, emails) always stay in plain,
 neutral Spanish.
 
-A `SessionStart` hook (`skill/hooks/session-start.js`) keeps the active dialect alive across
+A `SessionStart` hook (`hooks/session-start.js`) keeps the active dialect alive across
 `/compact` and session resume, reading a small local state file (never committed to this repo)
-and re-injecting a short reminder. See [skill/SKILL.md](skill/SKILL.md) for the full mechanism.
+and re-injecting a short reminder. See [SKILL.md](SKILL.md) for the full mechanism.
 
 ## Install
 
+Inside Claude Code, two lines:
+
+```
+/plugin marketplace add Mun1to/Vibeset
+/plugin install spanish-cave-man@vibeset
+```
+
+That is it. The hook is registered by the plugin, so there is nothing to add to
+`settings.json` by hand. If the install summary says `Run /reload-plugins to activate`, run it.
+
+<details>
+<summary>Prefer to install it by hand?</summary>
+
 ```bash
 git clone https://github.com/Mun1to/SpanishCaveMan.git
-ln -s "$(pwd)/SpanishCaveMan/skill" ~/.claude/skills/spanish-cave-man
+ln -s "$(pwd)/SpanishCaveMan" ~/.claude/skills/spanish-cave-man
 ```
 
-On Windows, create the symlink with PowerShell instead:
+On Windows, with PowerShell:
 
 ```powershell
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.claude\skills\spanish-cave-man" -Target "C:\path\to\SpanishCaveMan\skill"
+New-Item -ItemType Junction -Path "$env:USERPROFILE\.claude\skills\spanish-cave-man" -Target "C:\path\to\SpanishCaveMan"
 ```
+
+Installed this way, register the hook yourself in `~/.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [{ "type": "command", "command": "node \"C:/path/to/SpanishCaveMan/hooks/session-start.js\"" }] }
+    ]
+  }
+}
+```
+</details>
 
 ## Credits
 

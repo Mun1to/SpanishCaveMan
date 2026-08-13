@@ -1,0 +1,13 @@
+{
+  "name": "spanish-cave-man",
+  "description": "Caveman-style token efficiency, spoken with a real Spanish regional accent: eleven dialects, two intensity levels.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Mun1to",
+    "url": "https://github.com/Mun1to"
+  },
+  "homepage": "https://github.com/Mun1to/SpanishCaveMan",
+  "repository": "https://github.com/Mun1to/SpanishCaveMan",
+  "license": "MIT",
+  "keywords": ["spanish", "dialects", "token-efficiency", "caveman", "style", "fun"]
+}
